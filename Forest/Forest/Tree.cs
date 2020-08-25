@@ -12,6 +12,7 @@ namespace Forest
     }
     public class Tree
     {
+        public event Action onBurn;
         public TreeState State { get; set; }
         public int Health { get; set; }
         public Tree Connected { get; set; }

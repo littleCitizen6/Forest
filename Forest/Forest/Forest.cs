@@ -25,11 +25,45 @@ namespace Forest
             {
                 for (int j = 0; j < Trees.GetLength(1); j++)
                 {
-                    Random rander = new Random();
-                    int rand = rander.Next(1, 101);
-                    if (chance >= rand)
+                    for (int k = i-1; k < i+2; k++)
                     {
-                        Trees[i, j].Connected = Trees[i, j + 1]; //ToDo: make validation on array index
+                        for (int p = j-1; p < j+2; p++)
+                        {
+                            try
+                            {
+                                Random rander = new Random();
+                                int rand = rander.Next(1, 101);
+                                if (chance >= rand)
+                                {
+                                    Trees[i, j].Connected = Trees[k, p];
+                                }
+                            }
+                            catch (IndexOutOfRangeException) { }
+                            catch (NullReferenceException) 
+                            {
+                                if(Trees[i,j]==null)
+                                {
+                                    Trees[i, j] = new Tree();
+                                    if(--j == -1) 
+                                    {
+                                        i--;
+                                        j = Trees.GetLength(1);
+                                    }
+
+                                }
+                                else 
+                                {
+                                    Trees[k, p] = new Tree();
+                                    if (--p == -1)
+                                    {
+                                        k--;
+                                        p = Trees.GetLength(1);
+                                    }
+
+
+                                }
+                            }
+                        }
                     }
                 }
             }
